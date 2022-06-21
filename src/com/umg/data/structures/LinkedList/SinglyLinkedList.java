@@ -5,10 +5,10 @@
 package com.umg.data.structures.LinkedList;
 
 /**
- * Implementation of Singly linked list 
- * 
+ * Implementation of Singly linked list
+ *
  * <br> Operations supported are :
- * - Inserting a element in the list - This can be at beginning, at end or at a given position. 
+ * - Inserting a element in the list - This can be at beginning, at end or at a given position.
  * - Traversing through linked list.
  * - Check the size of the list.
  * - Check if list is empty.
@@ -17,7 +17,7 @@ package com.umg.data.structures.LinkedList;
  * - Delete an element from the list - This can again be at beginning, at end or at given position.
  * - Converting a Array from linked list.
  * </br>
- * 
+ *
  * @author Deepak
  *
  * @param <E>
@@ -27,7 +27,7 @@ public class SinglyLinkedList<E> {
 	/* Head is needed to keep track of first node */
 	private Node<E> head;
 
-	/* Size to keep track of number of elements in list. 
+	/* Size to keep track of number of elements in list.
 	 * This should be increased by 1 when a element is added
 	 * and should be reduced by 1 when a element is deleted */
 	private int size = 0;
@@ -35,18 +35,18 @@ public class SinglyLinkedList<E> {
 	/**
 	 * Inserts a element into a linked list at head position.
 	 * This does not require traversal through entire list.
-	 * 
+	 *
 	 * <br> Complexity :
 	 * Since there is no traversal involved here, and insertion
-	 * always happens at the head, this can be done in constant 
-	 * time. Hence, complexity comes out to be O(1) 
+	 * always happens at the head, this can be done in constant
+	 * time. Hence, complexity comes out to be O(1)
 	 * </br>
-	 * 
+	 *
 	 * @param value
 	 */
 	public void insertAtHead(E value) {
-		Node<E> newNode = new Node<E>(value); 
-		newNode.next = head; 
+		Node<E> newNode = new Node<E>(value);
+		newNode.next = head;
 		head = newNode;
 		size++;
 	}
@@ -54,20 +54,20 @@ public class SinglyLinkedList<E> {
 	/**
 	 * Inserts a element into a linked list at tail position.
 	 * This needs traversal through entire list before insertion happens.
-	 * 
+	 *
 	 * <br> Complexity :
 	 * Since, traversal through entire list is involved here before
-	 * new node gets inserted, and let's assume list has n elements, 
+	 * new node gets inserted, and let's assume list has n elements,
 	 * so insertion at tail will take O(n) time
 	 * </br>
-	 * 
+	 *
 	 * @param value
 	 */
 	public void insertAtTail(E value) {
 		Node<E> newNode = new Node<E>(value);
-		newNode.next = null; 
+		newNode.next = null;
 		/* Since this insertion is at tail, this new node will point to null */
-		if (null == head) { 
+		if (null == head) {
 			/* When list is empty */
 			head = newNode;
 		} else {
@@ -83,21 +83,21 @@ public class SinglyLinkedList<E> {
 	/**
 	 * Inserts a element into a linked list at a given position.
 	 * This needs traversal through the linked list till the given position.
-	 * 
+	 *
 	 * <br> Complexity :
-	 * This insertion can possibly happen at last node, means in worst case 
-	 * we may have to traverse entire linked list. On an average case with 
+	 * This insertion can possibly happen at last node, means in worst case
+	 * we may have to traverse entire linked list. On an average case with
 	 * linked list having n elements, this will take n/2 time and after ignoring
 	 * the constant term, complexity comes out to be O(n)
 	 * </br>
-	 * 
+	 *
 	 * @param value
 	 * @param position
 	 */
 	public void insertAtPosition(E value, int position) {
 		if (position < 0 || position > size) {
 			throw new IllegalArgumentException("Position is Invalid");
-		} 
+		}
 		/* Conditions check passed, let's insert the node */
 		Node<E> newNode = new Node<E>(value);
 		if (position == 0) {
@@ -127,7 +127,7 @@ public class SinglyLinkedList<E> {
 
 	/**
 	 * Returns size of the linked list
-	 * 
+	 *
 	 * @return {@link int}
 	 */
 	public int size() {
@@ -136,7 +136,7 @@ public class SinglyLinkedList<E> {
 
 	/**
 	 * Returns true is list is empty
-	 * 
+	 *
 	 * @return {@link boolean}
 	 */
 	public boolean isEmpty() {
@@ -146,19 +146,19 @@ public class SinglyLinkedList<E> {
 	/**
 	 * Returns the Node containing data item after searching
 	 * for a given index. If invalid index is passed, proper
-	 * exception is thrown. 
-	 *  
+	 * exception is thrown.
+	 *
 	 * @param index
 	 * @return {@link Node<E>}
 	 */
 	public Node<E> searchByIndex(int index) {
 		if (index < 0 || index >= size) {
 			throw new IndexOutOfBoundsException("Invalid index passed while searching for a value");
-		} 
+		}
 		/* Validation passed, let's search for value using the index */
 		Node<E> temp = head;
-		for (int i = 0; i < index; i++) { 
-			/* Start from 0 and go till one less then index 
+		for (int i = 0; i < index; i++) {
+			/* Start from 0 and go till one less then index
 			 * because we are jumping to next node inside the loop */
 			temp = temp.next;
 		}
@@ -166,14 +166,14 @@ public class SinglyLinkedList<E> {
 	}
 
 	/**
-	 * Returns the node containing data item after searching 
+	 * Returns the node containing data item after searching
 	 * for a given value. If there are multiple same values
 	 * in linked list, first one will be returned.
-	 * 
+	 *
 	 * @param value
 	 * @return {@link Node<E>}
 	 */
-	public Node<E> searchByValue(E value) { 
+	public Node<E> searchByValue(E value) {
 		/* Traverse through each node until this value is found */
 		Node<E> temp = head;
 		while (null != temp.next && temp.item != value) {
@@ -186,11 +186,11 @@ public class SinglyLinkedList<E> {
 	}
 
 	/**
-	 * Delete's the element present at head node 
+	 * Delete's the element present at head node
 	 */
 	public void deleteFromHead() {
 		/* If list is empty, return */
-		if (null == head) { 
+		if (null == head) {
 			return;
 		}
 		/* Update head and reduce size */
@@ -222,19 +222,19 @@ public class SinglyLinkedList<E> {
 
 	/**
 	 * Delete's the element present at index position
-	 * 
+	 *
 	 * @param position
 	 */
 	public void deleteFromPosition(int position) {
 		if (position < 0 || position >= size) {
 			throw new IllegalArgumentException("Position is Invalid");
-		} 
+		}
 		/* Conditions check passed, let's delete the node */
 		Node<E> nodeToBeDeleted = head;
 		for (int i = 0; i < position; i++) {
 			nodeToBeDeleted = nodeToBeDeleted.next;
 		}
-		if (nodeToBeDeleted.next == null) { 
+		if (nodeToBeDeleted.next == null) {
 			/* If this is a last node */
 			deleteFromTail();
 		} else {
@@ -244,9 +244,9 @@ public class SinglyLinkedList<E> {
 	}
 
 	/**
-	 * Returns a array containing each element 
+	 * Returns a array containing each element
 	 * from the list from start to end
-	 * 
+	 *
 	 * @return {@link Object[]}
 	 */
 	public Object[] toArray() {
@@ -263,16 +263,16 @@ public class SinglyLinkedList<E> {
 
 	/**
 	 * Node class of a linked list
-	 * This is needed since entire linked list is a collection 
+	 * This is needed since entire linked list is a collection
 	 * of nodes connected to each other through links
-	 * 
-	 * <br> We are keeping it generic so that it can be used with 
+	 *
+	 * <br> We are keeping it generic so that it can be used with
 	 * Integer, String or something else </br>
-	 * 
+	 *
 	 * <br> Each node contains a data item and pointer to next node.
-	 * Since this is a Singly linked list and each node points in 
+	 * Since this is a Singly linked list and each node points in
 	 * one direction, we maintain only pointer to one (next) node </br>
-	 * 
+	 *
 	 * @author Deepak
 	 *
 	 * @param <T>
